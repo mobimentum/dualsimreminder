@@ -1,0 +1,63 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="it.mobimentum.dualsimwidget"
+    android:versionCode="1"
+    android:versionName="1.0"
+    >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="19"
+        />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_settings_sim_card_manager"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        >
+        
+        <activity
+            android:name=".DualSimActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+<!--                 <category android:name="android.intent.category.LAUNCHER" /> -->
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".AlarmConfigActivity"
+            android:taskAffinity="it.mobimentum.dualsimwidget.AlarmConfigActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+		<receiver android:name=".DualSimAppWidgetProvider" >
+		    <intent-filter>
+		        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+		    </intent-filter>
+		    <meta-data android:name="android.appwidget.provider"
+		               android:resource="@xml/dual_sim_appwidget_info" />
+		</receiver>
+        
+        <receiver
+            android:name=".AlarmReceiver"
+            />
+			
+        <receiver
+            android:name=".BootReceiver"
+            >
+			<intent-filter>
+			    <action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+        	
+    </application>
+
+</manifest>

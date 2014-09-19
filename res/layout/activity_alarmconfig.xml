@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    
+    <CheckBox
+        android:id="@+id/enabledCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enabled"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        />
+    
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/save" />
+		
+	<ScrollView 
+	    android:id="@+id/scrollView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent"
+	    android:layout_centerHorizontal="true"
+	    android:fillViewport="true"
+	    android:layout_above="@id/saveBtn"
+	    android:layout_below="@id/enabledCheck"
+	    >
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:gravity="center_horizontal|top"
+	    >
+	
+	    <!-- Picker 1 -->
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="6dp"
+	        android:text="@string/alarm1" />
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="2dp"
+	        android:background="#6ac8ea"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginRight="15dp"
+	        />
+	
+	    <TimePicker
+	        android:id="@+id/timePicker1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        />
+	
+	    <!-- Picker 2 -->
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="6dp"
+	        android:text="@string/alarm2" />
+	
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="2dp"
+	        android:background="#6ac8ea"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginRight="15dp"
+	        />
+	    	    
+	    <TimePicker
+	        android:id="@+id/timePicker2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        />
+	
+	</LinearLayout>
+	</ScrollView>
+	
+</RelativeLayout>

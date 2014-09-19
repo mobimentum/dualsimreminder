@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DualSim Settings</string>
+    <string name="shortcut_name">SIM cards settings</string>
+    <string name="save">Save</string>
+    <string name="alarm1">Alarm 1</string>
+    <string name="alarm2">Alarm 2</string>
+    <string name="notification">Change DualSum settings</string>
+    <string name="enabled">Alarms enabled</string>
+    
+</resources>
