@@ -8,5 +8,6 @@
     <string name="alarm2">Alarm 2</string>
     <string name="notification">Change DualSum settings</string>
     <string name="enabled">Alarms enabled</string>
+    <string name="excludeWeekend">Exclude weekends</string>
     
 </resources>

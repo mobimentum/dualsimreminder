@@ -3,20 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    
-    <CheckBox
-        android:id="@+id/enabledCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enabled"
+
+    <LinearLayout
+        android:id="@+id/checkboxes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
-        />
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+	    <CheckBox
+	        android:id="@+id/enabledCheck"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/enabled"
+	        />
+	    <CheckBox
+	        android:id="@+id/weekendsCheck"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/excludeWeekend"
+	        android:layout_marginLeft="8dp"
+	        />
+    </LinearLayout>
     
     <Button
         android:id="@+id/saveBtn"
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -32,7 +47,7 @@
 	    android:layout_centerHorizontal="true"
 	    android:fillViewport="true"
 	    android:layout_above="@id/saveBtn"
-	    android:layout_below="@id/enabledCheck"
+	    android:layout_below="@id/checkboxes"
 	    >
 	<LinearLayout
 	    android:layout_width="wrap_content"

@@ -21,12 +21,13 @@ import android.widget.TimePicker;
 
 public class AlarmConfigActivity extends Activity implements OnClickListener {
 
-	static final String PREF_TIME1 = "TIME1", PREF_TIME2 = "TIME2", PREF_ENABLED = "ENABLED";
+	static final String PREF_TIME1 = "TIME1", PREF_TIME2 = "TIME2", 
+			PREF_ENABLED = "ENABLED", PREF_WEEKENDS = "WEEKENDS";
 
 	private static final String TAG = AlarmConfigActivity.class.getSimpleName();
 
 	private TimePicker mPicker1, mPicker2;
-	private CheckBox mEnabled;
+	private CheckBox mEnabled, mWeekends;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class AlarmConfigActivity extends Activity implements OnClickListener {
 		
 		findViewById(R.id.saveBtn).setOnClickListener(this);
 		mEnabled = (CheckBox) findViewById(R.id.enabledCheck);
+		mWeekends = (CheckBox) findViewById(R.id.weekendsCheck);
 		mPicker1 = (TimePicker) findViewById(R.id.timePicker1);
 		mPicker2 = (TimePicker) findViewById(R.id.timePicker2);
 
@@ -46,6 +48,7 @@ public class AlarmConfigActivity extends Activity implements OnClickListener {
 		
 		boolean enabled = prefs.getBoolean(PREF_ENABLED, false);
 		mEnabled.setChecked(enabled);
+		mWeekends.setChecked(prefs.getBoolean(PREF_WEEKENDS, true));
 		mPicker1.setEnabled(enabled); mPicker2.setEnabled(enabled);
 		mEnabled.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
@@ -66,6 +69,7 @@ public class AlarmConfigActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		PreferenceManager.getDefaultSharedPreferences(this).edit()
 				.putBoolean(PREF_ENABLED, mEnabled.isChecked())
+				.putBoolean(PREF_WEEKENDS, mWeekends.isChecked())
 				.putString(PREF_TIME1, mPicker1.getCurrentHour()+":"+mPicker1.getCurrentMinute())
 				.putString(PREF_TIME2, mPicker2.getCurrentHour()+":"+mPicker2.getCurrentMinute())
 				.commit();

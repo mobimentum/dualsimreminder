@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/checkboxes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+	    <CheckBox
+	        android:id="@+id/enabledCheck"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/enabled"
+	        />
+	    <CheckBox
+	        android:id="@+id/weekendsCheck"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/excludeWeekend"
+	        android:layout_marginLeft="8dp"
+	        />
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/save" />
+		
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:gravity="center_horizontal|top"
+	    android:layout_centerHorizontal="true"
+	    android:layout_above="@id/saveBtn"
+	    android:layout_below="@id/checkboxes"
+	    >
+	
+	    <!-- Picker 1 -->
+		<LinearLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:gravity="center_horizontal|top"
+		    >
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="6dp"
+		        android:text="@string/alarm1" />
+		    
+		    <View
+		        android:layout_width="match_parent"
+		        android:layout_height="2dp"
+		        android:background="#6ac8ea"
+		        android:layout_marginLeft="15dp"
+		        android:layout_marginRight="15dp"
+		        />
+		
+		    <TimePicker
+		        android:id="@+id/timePicker1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        />
+		</LinearLayout>
+		
+	    <!-- Picker 2 -->
+		<LinearLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:gravity="center_horizontal|top"
+		    android:layout_marginLeft="8dp"
+		    >
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="6dp"
+		        android:text="@string/alarm2" />
+		
+		    <View
+		        android:layout_width="match_parent"
+		        android:layout_height="2dp"
+		        android:background="#6ac8ea"
+		        android:layout_marginLeft="15dp"
+		        android:layout_marginRight="15dp"
+		        />
+		    	    
+		    <TimePicker
+		        android:id="@+id/timePicker2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        />
+		</LinearLayout>
+	    	
+	</LinearLayout>
+	
+</RelativeLayout>

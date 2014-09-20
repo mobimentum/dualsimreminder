@@ -1,11 +1,16 @@
 package it.mobimentum.dualsimwidget;
 
+import static it.mobimentum.dualsimwidget.AlarmConfigActivity.PREF_WEEKENDS;
+
+import java.util.Calendar;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -15,6 +20,15 @@ public class AlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Log.d(TAG, "onReceive()");
+		
+		// Weekends?
+		int weekDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+		boolean excludeWeekends = PreferenceManager.getDefaultSharedPreferences(context)
+				.getBoolean(PREF_WEEKENDS, true);
+		if (excludeWeekends && (weekDay == Calendar.SUNDAY || weekDay == Calendar.SATURDAY)) {
+			Log.d(TAG, "Skipping weekend alarms...");
+			return;
+		}
 
 		// Crea notifica
 		Notification.Builder builder =
