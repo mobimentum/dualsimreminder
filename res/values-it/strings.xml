@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="app_name">Impostazioni DualSim</string>
     <string name="shortcut_name">Gestione schede SIM</string>
     <string name="save">Salva</string>
     <string name="alarm1">Allarme 1</string>

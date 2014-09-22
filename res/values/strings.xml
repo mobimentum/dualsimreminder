@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">DualSim Settings</string>
+    <string name="app_name">DualSim Reminder</string>
+    
     <string name="shortcut_name">SIM cards settings</string>
     <string name="save">Save</string>
     <string name="alarm1">Alarm 1</string>
