@@ -82,14 +82,12 @@ public class SettingsActivity extends AppCompatActivity {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
-			Log.d(TAG, "onPreferenceChange(): preference="+preference+", newValue="+newValue);
-
 			// Save working hours
 			if (preference.equals(mStartTimePref) || preference.equals(mEndTimePref)) {
 				mPrefs.edit().putString(preference.getKey(), (String) newValue).commit();
-
-				updateWorkingHours();
 			}
+
+			updateWorkingHours();
 
 			return false;
 		}

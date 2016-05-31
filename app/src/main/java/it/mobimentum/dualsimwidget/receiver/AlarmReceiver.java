@@ -12,6 +12,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -24,40 +25,41 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Log.d(TAG, "onReceive()");
+		Log.i(TAG, "onReceive()");
 		
 		// Weekends?
 		int weekDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 		boolean excludeWeekends = PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(context.getString(R.string.pref_key_exclude_weekends), true);
-		if (excludeWeekends && (weekDay == Calendar.SUNDAY || weekDay == Calendar.SATURDAY)) {
-			Log.d(TAG, "Skipping weekend alarms...");
+		if (!excludeWeekends || (weekDay != Calendar.SUNDAY && weekDay != Calendar.SATURDAY)) {
+			// Crea notifica
+			Notification.Builder builder = new Notification.Builder(context)
+					.setSmallIcon(R.drawable.ic_dual_sim_notif)
+					.setContentTitle(context.getString(R.string.app_name))
+					.setContentText(context.getString(R.string.notification))
+					.setAutoCancel(true);
 
-			return;
+			// Pending intent
+			Intent resultIntent = DualSimPhone.getDualSimSettingsIntent()
+					.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			PendingIntent resultPendingIntent = PendingIntent.getActivity(
+					context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+			builder.setContentIntent(resultPendingIntent);
+
+			// GO!
+			NotificationManager notifMgr = (NotificationManager)
+					context.getSystemService(Context.NOTIFICATION_SERVICE);
+			notifMgr.notify(1, builder.build());
 		}
 
-		// Crea notifica
-		Notification.Builder builder = new Notification.Builder(context)
-				.setSmallIcon(R.drawable.ic_dual_sim_notif)
-				.setContentTitle(context.getString(R.string.app_name))
-				.setContentText(context.getString(R.string.notification))
-				.setAutoCancel(true);
-
-		// Pending intent
-		Intent resultIntent = DualSimPhone.getDualSimSettingsIntent()
-				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		PendingIntent resultPendingIntent = PendingIntent.getActivity(
-				context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-		builder.setContentIntent(resultPendingIntent);
-
-		// GO!
-		NotificationManager notifMgr = (NotificationManager)
-				context.getSystemService(Context.NOTIFICATION_SERVICE);
-		notifMgr.notify(1, builder.build());
+		// Reschedule next alarm for doze mode
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			rescheduleNotifications(context);
+		}
 	}
 
 	public static void rescheduleNotifications(Context context) {
-		Log.d(TAG, "rescheduleNotifications()");
+		Log.i(TAG, "rescheduleNotifications()");
 
 		// Cancel current alarms
 		setAlarm(context, 1, 0, 0, true);
@@ -81,10 +83,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 		AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
 		Intent intent = new Intent(context, AlarmReceiver.class);
-		PendingIntent alarmIntent = PendingIntent.getBroadcast(context, alarmNum/*no cache*/, intent, 0);
+		PendingIntent alarmIntent = PendingIntent.getBroadcast(context,
+				alarmNum/*no cache*/, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 		if (cancel) {
-			Log.d(TAG, "Alarm cancelled: "+alarmNum);
+			Log.i(TAG, "Alarm cancelled: "+alarmNum);
 			alarmMgr.cancel(alarmIntent);
 
 			return;
@@ -101,9 +104,19 @@ public class AlarmReceiver extends BroadcastReceiver {
 //		calendar.add(Calendar.SECOND, 5);
 
 		long diff = (calendar.getTimeInMillis() - System.currentTimeMillis()) / 1000;
-		Log.d(TAG, "Alarm scheduled at "+calendar.getTime()+" in "+diff+"''");
 
-		alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-				AlarmManager.INTERVAL_DAY, alarmIntent);
+		Log.i(TAG, "Alarm scheduled at "+calendar.getTime()+" in "+diff+"''");
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			// Doze mode: WARNING: this will NOT REPEAT the alarm!
+			// cfr. https://developer.android.com/training/monitoring-device-state/doze-standby.html
+			long nextAlarm = calendar.getTimeInMillis();
+			if (nextAlarm < System.currentTimeMillis()) nextAlarm += AlarmManager.INTERVAL_DAY;
+			alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextAlarm, alarmIntent);
+		}
+		else {
+			// Pre-marshmallow
+			alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+		}
 	}
 }
