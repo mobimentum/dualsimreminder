@@ -32,6 +32,10 @@ public class DualSimPhone {
 		// Huawei P10 pro
 		SUPPORTED_PHONES.add(new DualSimPhone("HUAWEI", "BLA-L29",
 				new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.DualCardSettings"))));
+
+		// Honor 8 64GB
+		SUPPORTED_PHONES.add(new DualSimPhone("HONOR", "FRD-L19",
+				new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.DualCardSettings"))));
 	}
 
 	public static Intent getDualSimSettingsIntent() {
