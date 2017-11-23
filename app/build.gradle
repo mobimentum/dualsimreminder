@@ -13,8 +13,8 @@ android {
         applicationId "it.mobimentum.dualsimwidget"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 2004
-        versionName "2.0.04"
+        versionCode 2005
+        versionName "2.0.05"
     }
     buildTypes {
         release {

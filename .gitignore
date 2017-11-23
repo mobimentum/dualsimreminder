@@ -6,4 +6,5 @@
 /build
 /captures
 app/*.apk
+/app/release
 
