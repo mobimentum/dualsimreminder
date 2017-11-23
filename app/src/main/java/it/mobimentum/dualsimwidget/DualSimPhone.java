@@ -29,7 +29,7 @@ public class DualSimPhone {
 		SUPPORTED_PHONES.add(new DualSimPhone("HUAWEI", "EVA-AL10",
 				new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.DualCardSettings"))));
 
-		// Huawei P10 pro
+		// Huawei Mate 10 pro
 		SUPPORTED_PHONES.add(new DualSimPhone("HUAWEI", "BLA-L29",
 				new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.DualCardSettings"))));
 
