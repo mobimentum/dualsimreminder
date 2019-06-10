@@ -8,9 +8,8 @@ The two features of the app are:
 - a widget lets you open Dual SIM settings directly from the home screen
 
 Currently supported phones:
-- Huawei P9 (and probably all other Huawei phones)
+- Huawei P9, Mate 10 Pro (and probably all other Huawei/Honor phones)
 - Samsung S4 mini (and probably all other Samsung phones)
 - ZTE Blade S6 (and probably all other ZTE and Nubia phones)
 
 You can find a compiled and ready-to-use version on the app on the Play Store: https://play.google.com/store/apps/details?id=it.mobimentum.dualsimwidget
-
