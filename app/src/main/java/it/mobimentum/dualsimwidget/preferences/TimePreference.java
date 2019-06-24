@@ -22,6 +22,13 @@ public class TimePreference extends DialogPreference {
 
 	private TimePicker picker;
 
+	public TimePreference(Context ctxt, AttributeSet attrs) {
+		super(ctxt, attrs);
+
+		setPositiveButtonText(R.string.timepicker_ok_btn);
+		setNegativeButtonText(android.R.string.cancel);
+	}
+
 	public static int getHour(String time) {
 		String[] pieces = time.split(":");
 
@@ -34,11 +41,8 @@ public class TimePreference extends DialogPreference {
 		return (Integer.parseInt(pieces[1]));
 	}
 
-	public TimePreference(Context ctxt, AttributeSet attrs) {
-		super(ctxt, attrs);
-
-		setPositiveButtonText(R.string.timepicker_ok_btn);
-		setNegativeButtonText(android.R.string.cancel);
+	public static String formatTime(String time) {
+		return getHour(time) + ":" + String.format(Locale.getDefault(), "%02d", getMinute(time));
 	}
 
 	@Override
@@ -65,7 +69,7 @@ public class TimePreference extends DialogPreference {
 			lastHour = picker.getCurrentHour();
 			lastMinute = picker.getCurrentMinute();
 
-			String time = String.valueOf(lastHour) + ":" + String.valueOf(lastMinute);
+			String time = lastHour + ":" + lastMinute;
 
 			if (callChangeListener(time)) {
 				persistString(time);
@@ -96,9 +100,5 @@ public class TimePreference extends DialogPreference {
 
 		lastHour = getHour(time);
 		lastMinute = getMinute(time);
-	}
-
-	public static String formatTime(String time) {
-		return getHour(time) + ":" + String.format(Locale.getDefault(), "%02d", getMinute(time));
 	}
 }

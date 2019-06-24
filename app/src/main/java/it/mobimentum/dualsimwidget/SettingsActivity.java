@@ -4,11 +4,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import java.util.Locale;
@@ -17,7 +17,7 @@ import it.mobimentum.dualsimwidget.preferences.TimePreference;
 import it.mobimentum.dualsimwidget.receiver.AlarmReceiver;
 
 public class SettingsActivity extends AppCompatActivity {
-	
+
 	private static final String TAG = SettingsActivity.class.getSimpleName();
 
 	@Override
@@ -46,9 +46,9 @@ public class SettingsActivity extends AppCompatActivity {
 
 			// Device
 			Preference devicePref = findPreference(getString(R.string.pref_key_device));
-			devicePref.setSummary(Build.BRAND+" "+Build.MODEL);
+			devicePref.setSummary(Build.BRAND + " " + Build.MODEL);
 			final Intent intent = DualSimPhone.getDualSimSettingsIntent();
-			Log.i(TAG, "model="+Build.MODEL+", brand="+Build.BRAND+", intent="+intent);
+			Log.i(TAG, "model=" + Build.MODEL + ", brand=" + Build.BRAND + ", intent=" + intent);
 			if (!DualSimPhone.isPhoneSupported()) devicePref.setIcon(R.drawable.ic_action_warning);
 
 			// Debug test
@@ -95,10 +95,10 @@ public class SettingsActivity extends AppCompatActivity {
 		private void updateWorkingHours() {
 			mStartTimePref.setSummary(String.format(Locale.getDefault(), getString(R.string.pref_alarm_start_summary),
 					TimePreference.formatTime(mPrefs.getString(getString(R.string.pref_key_alarm_start),
-					getString(R.string.pref_alarm_start_default)))));
+							getString(R.string.pref_alarm_start_default)))));
 			mEndTimePref.setSummary(String.format(Locale.getDefault(), getString(R.string.pref_alarm_end_summary),
 					TimePreference.formatTime(mPrefs.getString(getString(R.string.pref_key_alarm_end),
-					getString(R.string.pref_alarm_end_default)))));
+							getString(R.string.pref_alarm_end_default)))));
 
 			// Reschedule alarms
 			AlarmReceiver.rescheduleNotifications(getActivity());
