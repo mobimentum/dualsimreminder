@@ -15,4 +15,6 @@
 
     <string name="notification">Modifica le impostazioni DualSim</string>
 
+    <string name="shortcut_name">Gestione SIM</string>
+
 </resources>

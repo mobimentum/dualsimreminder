@@ -62,10 +62,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 		calendar.set(Calendar.MINUTE, mins);
 		calendar.set(Calendar.SECOND, 0);
 
-		// XXX DEBUG
-//		calendar = Calendar.getInstance();
-//		calendar.add(Calendar.SECOND, 5);
-
 		long diff = (calendar.getTimeInMillis() - System.currentTimeMillis()) / 1000;
 
 		Log.i(TAG, "Alarm scheduled at " + calendar.getTime() + " in " + diff + "''");

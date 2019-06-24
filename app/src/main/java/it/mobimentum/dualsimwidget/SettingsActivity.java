@@ -32,9 +32,10 @@ public class SettingsActivity extends AppCompatActivity {
 	public static class MyPreferenceFragment extends PreferenceFragment
 			implements Preference.OnPreferenceChangeListener {
 
-		private TimePreference mStartTimePref, mEndTimePref;
+		@SuppressWarnings("squid:S1659")
+		private TimePreference startTimePref, endTimePref;
 
-		private SharedPreferences mPrefs;
+		private SharedPreferences prefs;
 
 		@Override
 		public void onCreate(final Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 			addPreferencesFromResource(R.xml.preferences);
 
-			mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 			// Device
 			Preference devicePref = findPreference(getString(R.string.pref_key_device));
@@ -69,22 +70,18 @@ public class SettingsActivity extends AppCompatActivity {
 			});
 
 			// Working hours
-			mStartTimePref = (TimePreference) findPreference(getString(R.string.pref_key_alarm_start));
-			mStartTimePref.setOnPreferenceChangeListener(this);
-			mEndTimePref = (TimePreference) findPreference(getString(R.string.pref_key_alarm_end));
-			mEndTimePref.setOnPreferenceChangeListener(this);
+			startTimePref = (TimePreference) findPreference(getString(R.string.pref_key_alarm_start));
+			startTimePref.setOnPreferenceChangeListener(this);
+			endTimePref = (TimePreference) findPreference(getString(R.string.pref_key_alarm_end));
+			endTimePref.setOnPreferenceChangeListener(this);
 			updateWorkingHours();
-
-			// Other preferences
-//			findPreference(getString(R.string.pref_key_enable_notif)).setOnPreferenceChangeListener(this);
-//			findPreference(getString(R.string.pref_key_exclude_weekends)).setOnPreferenceChangeListener(this);
 		}
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			// Save working hours
-			if (preference.equals(mStartTimePref) || preference.equals(mEndTimePref)) {
-				mPrefs.edit().putString(preference.getKey(), (String) newValue).commit();
+			if (preference.equals(startTimePref) || preference.equals(endTimePref)) {
+				prefs.edit().putString(preference.getKey(), (String) newValue).commit();
 			}
 
 			updateWorkingHours();
@@ -93,11 +90,11 @@ public class SettingsActivity extends AppCompatActivity {
 		}
 
 		private void updateWorkingHours() {
-			mStartTimePref.setSummary(String.format(Locale.getDefault(), getString(R.string.pref_alarm_start_summary),
-					TimePreference.formatTime(mPrefs.getString(getString(R.string.pref_key_alarm_start),
+			startTimePref.setSummary(String.format(Locale.getDefault(), getString(R.string.pref_alarm_start_summary),
+					TimePreference.formatTime(prefs.getString(getString(R.string.pref_key_alarm_start),
 							getString(R.string.pref_alarm_start_default)))));
-			mEndTimePref.setSummary(String.format(Locale.getDefault(), getString(R.string.pref_alarm_end_summary),
-					TimePreference.formatTime(mPrefs.getString(getString(R.string.pref_key_alarm_end),
+			endTimePref.setSummary(String.format(Locale.getDefault(), getString(R.string.pref_alarm_end_summary),
+					TimePreference.formatTime(prefs.getString(getString(R.string.pref_key_alarm_end),
 							getString(R.string.pref_alarm_end_default)))));
 
 			// Reschedule alarms

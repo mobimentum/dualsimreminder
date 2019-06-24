@@ -25,4 +25,6 @@
 
     <string name="notification">Change DualSim settings</string>
 
+    <string name="shortcut_name">SIM settings</string>
+
 </resources>
