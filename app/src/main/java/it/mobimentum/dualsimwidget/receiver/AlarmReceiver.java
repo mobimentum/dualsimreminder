@@ -1,7 +1,7 @@
 package it.mobimentum.dualsimwidget.receiver;
 
 import android.app.AlarmManager;
-import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import java.util.Calendar;
 import it.mobimentum.dualsimwidget.DualSimPhone;
 import it.mobimentum.dualsimwidget.R;
 
+@SuppressWarnings("squid:S1659")
 public class AlarmReceiver extends BroadcastReceiver {
 
 	private static final String TAG = AlarmReceiver.class.getSimpleName();
@@ -88,8 +90,23 @@ public class AlarmReceiver extends BroadcastReceiver {
 		boolean excludeWeekends = PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(context.getString(R.string.pref_key_exclude_weekends), true);
 		if (!excludeWeekends || (weekDay != Calendar.SUNDAY && weekDay != Calendar.SATURDAY)) {
-			// Crea notifica
-			Notification.Builder builder = new Notification.Builder(context)
+			NotificationManager notifMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+			// Create notification channel
+			final String channelId = "DUALSIM_REMINDER", channelTitle = context.getString(R.string.app_name);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				int importance = NotificationManager.IMPORTANCE_HIGH;
+				NotificationChannel channel = notifMgr.getNotificationChannel(channelId);
+				if (channel == null) {
+					channel = new NotificationChannel(channelId, channelTitle, importance);
+					channel.enableVibration(true);
+					channel.setVibrationPattern(new long[] { 100, 200, 300, 400, 500, 400, 300, 200, 400 });
+					notifMgr.createNotificationChannel(channel);
+				}
+			}
+
+			// Create notification
+			NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
 					.setSmallIcon(R.drawable.ic_dual_sim_notif)
 					.setContentTitle(context.getString(R.string.app_name))
 					.setContentText(context.getString(R.string.notification))
@@ -103,8 +120,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 			builder.setContentIntent(resultPendingIntent);
 
 			// GO!
-			NotificationManager notifMgr = (NotificationManager)
-					context.getSystemService(Context.NOTIFICATION_SERVICE);
 			notifMgr.notify(1, builder.build());
 		}
 
