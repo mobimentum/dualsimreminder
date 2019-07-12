@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
-    android:drawableTop="@drawable/ic_settings_sim_card_manager"
+    android:drawableTop="@drawable/ic_launcher_foreground"
     android:gravity="center"
     android:shadowColor="#000"
     android:shadowDx="1"

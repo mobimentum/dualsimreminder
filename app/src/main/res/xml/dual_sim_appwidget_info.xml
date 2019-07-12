@@ -2,7 +2,7 @@
     android:initialLayout="@layout/dual_sim_appwidget"
     android:minWidth="40dp"
     android:minHeight="40dp"
-    android:previewImage="@drawable/ic_settings_sim_card_manager"
+    android:previewImage="@drawable/ic_launcher_foreground"
     android:resizeMode="none"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen|keyguard" />
