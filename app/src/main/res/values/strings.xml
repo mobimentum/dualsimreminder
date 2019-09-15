@@ -27,4 +27,6 @@
 
     <string name="shortcut_name">SIM settings</string>
 
+    <string name="device_not_supported">Unfortunately this device is not supported</string>
+
 </resources>

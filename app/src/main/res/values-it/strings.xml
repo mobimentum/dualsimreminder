@@ -17,4 +17,6 @@
 
     <string name="shortcut_name">Gestione SIM</string>
 
+    <string name="device_not_supported">Purtroppo questo dispositivo non è supportato</string>
+
 </resources>

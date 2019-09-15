@@ -10,6 +10,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -62,7 +63,14 @@ public class SettingsActivity extends AppCompatActivity {
 					catch (ActivityNotFoundException e) {
 						Log.w(TAG, e.getMessage(), e);
 
-						startActivity(DualSimPhone.DEFAULT_SETTINGS_INTENT);
+						try {
+							startActivity(DualSimPhone.DEFAULT_SETTINGS_INTENT);
+						}
+						catch (ActivityNotFoundException e2) {
+							Log.d(TAG, e.getMessage(), e);
+
+							Toast.makeText(getActivity(), R.string.device_not_supported, Toast.LENGTH_LONG).show();
+						}
 					}
 
 					return true;
