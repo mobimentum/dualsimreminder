@@ -8,3 +8,4 @@
 app/*.apk
 /app/release
 projectFilesBackup/
+app/fabric.properties
