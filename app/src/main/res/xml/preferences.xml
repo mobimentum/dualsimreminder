@@ -16,11 +16,11 @@
         android:summary="@string/pref_excude_weekends_summary"
         android:title="@string/pref_excude_weekends_title" />
 
-    <it.mobimentum.dualsimwidget.preferences.TimePreference
+    <it.mauriziopinotti.dualsimwidget.preferences.TimePreference
         android:defaultValue="@string/pref_alarm_start_default"
         android:key="@string/pref_key_alarm_start"
         android:title="@string/pref_alarm_start_title" />
-    <it.mobimentum.dualsimwidget.preferences.TimePreference
+    <it.mauriziopinotti.dualsimwidget.preferences.TimePreference
         android:defaultValue="@string/pref_alarm_end_default"
         android:key="@string/pref_key_alarm_end"
         android:title="@string/pref_alarm_end_title" />

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "61600761032",
+    "project_id": "dualsim-reminder",
+    "storage_bucket": "dualsim-reminder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61600761032:android:097282238daa43bccd51fd",
+        "android_client_info": {
+          "package_name": "it.mauriziopinotti.dualsimwidget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61600761032-t0djr2q9othjd1ap2kem67rjd5m6iq0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAiA0dbp8p_xUNlrkRhISdRfeVaYaFUsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61600761032-t0djr2q9othjd1ap2kem67rjd5m6iq0h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

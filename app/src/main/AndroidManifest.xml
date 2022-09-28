@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="it.mobimentum.dualsimwidget">
+    package="it.mauriziopinotti.dualsimwidget">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:name=".DualSimApp"
@@ -14,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SettingsActivity">
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
@@ -23,13 +27,17 @@
 
         <receiver android:name=".receiver.AlarmReceiver" />
 
-        <receiver android:name=".receiver.BootReceiver">
+        <receiver
+            android:name=".receiver.BootReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".receiver.DualSimAppWidgetProvider">
+        <receiver
+            android:name=".receiver.DualSimAppWidgetProvider"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -38,10 +46,6 @@
                 android:resource="@xml/dual_sim_appwidget_info" />
         </receiver>
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="6265c5dbaa7182f172196d2924c61c2705beb91d" />
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
